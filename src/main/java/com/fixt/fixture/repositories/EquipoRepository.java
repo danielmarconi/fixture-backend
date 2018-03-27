@@ -1,6 +1,6 @@
 package com.fixt.fixture.repositories;
 
-import com.fixt.fixture.model.Usuario;
+import com.fixt.fixture.model.Equipo;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -9,6 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
  */
 
 @Transactional
-public interface UsuarioRepository extends CrudRepository<Usuario, Long> {
+public interface EquipoRepository extends CrudRepository<Equipo, Long> {
 
 }

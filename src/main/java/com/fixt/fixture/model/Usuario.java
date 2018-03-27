@@ -17,6 +17,11 @@ public class Usuario {
     @OneToOne
     Equipo equipo;
 
+    public Usuario(String nombre, Equipo equipo) {
+        this.nombre = nombre;
+        this.equipo = equipo;
+    }
+
     public Usuario() {
     }
 

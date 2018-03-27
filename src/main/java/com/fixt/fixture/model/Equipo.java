@@ -16,6 +16,11 @@ public class Equipo {
 
     String imagen;
 
+    public Equipo(String nombre, String imagen) {
+        this.nombre = nombre;
+        this.imagen = imagen;
+    }
+
     public Equipo() {
     }
 

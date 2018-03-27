@@ -1,12 +1,17 @@
 package com.fixt.fixture.controllers;
 
+import com.fixt.fixture.Services.ServiceFixture;
+import com.fixt.fixture.model.Equipo;
 import com.fixt.fixture.util.Status;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * Created by kevinvarela on 06/03/18.
@@ -15,6 +20,9 @@ import org.springframework.web.bind.annotation.*;
 public class MainController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MainController.class);
+
+    @Autowired
+    private ServiceFixture serviceFixture;
 
 //    @RequestMapping(value = "/book", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 //    @ResponseStatus(value = HttpStatus.OK)
@@ -43,5 +51,15 @@ public class MainController {
         Status status = new Status("OK");
         LOGGER.info("Return Status: {}", status.getStatus());
         return status;
+    }
+
+    @RequestMapping(value = "/teams", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseStatus(value = HttpStatus.OK)
+    @ResponseBody
+    public List<Equipo> obtenerTodosLosEquipos() {
+
+        LOGGER.info("Request: [GET] /teams");
+
+        return serviceFixture.obtenerTodosLosEquipos();
     }
 }

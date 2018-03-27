@@ -20,6 +20,12 @@ public class Torneo {
 
     Integer fechaHabilitida;
 
+    public Torneo(String nombre, List<Fecha> fechas, Integer fechaHabilitida) {
+        this.nombre = nombre;
+        this.fechas = fechas;
+        this.fechaHabilitida = fechaHabilitida;
+    }
+
     public Torneo() {
     }
 
