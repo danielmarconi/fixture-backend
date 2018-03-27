@@ -3,6 +3,7 @@ package com.fixt.fixture.Services;
 import com.fixt.fixture.model.Equipo;
 import com.fixt.fixture.model.Usuario;
 import com.fixt.fixture.repositories.EquipoRepository;
+import com.fixt.fixture.repositories.TorneoRepository;
 import com.fixt.fixture.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,9 @@ public class ServiceFixture {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    @Autowired
+    private TorneoRepository torneoRepository;
+
 
     @Transactional
     public void inicializarBaseDeDatos() {
@@ -42,6 +46,23 @@ public class ServiceFixture {
         Usuario gonza = new Usuario("Gonza", independiente);
 
         usuarioRepository.save(gonza);
+
+        Equipo racing = new Equipo("Racing", "aa");
+
+        equipoRepository.save(racing);
+
+        Usuario alito = new Usuario("Alito", racing);
+
+        usuarioRepository.save(alito);
+
+        Equipo boca = new Equipo("Boca", "aa");
+
+        equipoRepository.save(boca);
+
+        Usuario nahue = new Usuario("Nahue", boca);
+
+        usuarioRepository.save(nahue);
+
 
     }
 
