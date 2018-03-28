@@ -1,10 +1,7 @@
 package com.fixt.fixture.Services;
 
-import com.fixt.fixture.model.Equipo;
-import com.fixt.fixture.model.Usuario;
-import com.fixt.fixture.repositories.EquipoRepository;
-import com.fixt.fixture.repositories.TorneoRepository;
-import com.fixt.fixture.repositories.UsuarioRepository;
+import com.fixt.fixture.model.*;
+import com.fixt.fixture.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,42 +24,54 @@ public class ServiceFixture {
     @Autowired
     private TorneoRepository torneoRepository;
 
+    @Autowired
+    private FechaRepository fechaRepository;
+
+    @Autowired
+    private PartidoRepository partidoRepository;
+
 
     @Transactional
     public void inicializarBaseDeDatos() {
 
         Equipo lanus = new Equipo("Lanus", "aa");
-
-        equipoRepository.save(lanus);
-
-        Usuario kevin = new Usuario("Kevin", lanus);
-
-        usuarioRepository.save(kevin);
-
         Equipo independiente = new Equipo("Independiente", "aa");
-
-        equipoRepository.save(independiente);
-
-        Usuario gonza = new Usuario("Gonza", independiente);
-
-        usuarioRepository.save(gonza);
-
         Equipo racing = new Equipo("Racing", "aa");
-
-        equipoRepository.save(racing);
-
-        Usuario alito = new Usuario("Alito", racing);
-
-        usuarioRepository.save(alito);
-
         Equipo boca = new Equipo("Boca", "aa");
 
+        equipoRepository.save(lanus);
+        equipoRepository.save(independiente);
+        equipoRepository.save(racing);
         equipoRepository.save(boca);
 
+        Usuario kevin = new Usuario("Kevin", lanus);
+        Usuario gonza = new Usuario("Gonza", independiente);
+        Usuario alito = new Usuario("Alito", racing);
         Usuario nahue = new Usuario("Nahue", boca);
 
+        usuarioRepository.save(kevin);
+        usuarioRepository.save(gonza);
+        usuarioRepository.save(alito);
         usuarioRepository.save(nahue);
 
+        Partido lanusIndependiente = new Partido(lanus, independiente);
+        Partido racingBoca = new Partido(racing, boca);
+
+        partidoRepository.save(lanusIndependiente);
+        partidoRepository.save(racingBoca);
+
+        Fecha fecha1 = new Fecha(1);
+
+        fecha1.agregarPartido(lanusIndependiente);
+        fecha1.agregarPartido(racingBoca);
+
+        fechaRepository.save(fecha1);
+
+        Torneo ligaA = new Torneo("Copa liga A");
+
+        ligaA.agregarFechas(fecha1);
+
+        torneoRepository.save(ligaA);
 
     }
 

@@ -1,6 +1,7 @@
 package com.fixt.fixture.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,9 +17,19 @@ public class Fecha {
     Integer numeroDeFecha;
 
     @OneToMany
-    List<Partido> partidos;
+    List<Partido> partidos = new ArrayList<>();
+
+    public Fecha(Integer numeroDeFecha) {
+        //TODO VALIDAR QUE SEA UN NUMERO DE FECHA VALIDO
+        this.numeroDeFecha = numeroDeFecha;
+    }
 
     public Fecha() {
+    }
+
+    public void agregarPartido(Partido partidoNuevo){
+        //TODO VALIDAR QUE SEA UN PARTIDO VALIDO
+        partidos.add(partidoNuevo);
     }
 
     public Long getId() {

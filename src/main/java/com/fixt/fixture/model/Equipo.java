@@ -17,6 +17,7 @@ public class Equipo {
     String imagen;
 
     public Equipo(String nombre, String imagen) {
+        //TODO VALIDAR QUE SEA UN EQUIPO VALIDO
         this.nombre = nombre;
         this.imagen = imagen;
     }

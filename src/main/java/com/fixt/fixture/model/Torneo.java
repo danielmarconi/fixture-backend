@@ -1,6 +1,7 @@
 package com.fixt.fixture.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,17 +17,21 @@ public class Torneo {
     String nombre;
 
     @OneToMany
-    List<Fecha> fechas;
+    List<Fecha> fechas = new ArrayList<>();
 
     Integer fechaHabilitida;
 
-    public Torneo(String nombre, List<Fecha> fechas, Integer fechaHabilitida) {
+    public Torneo(String nombre) {
         this.nombre = nombre;
-        this.fechas = fechas;
-        this.fechaHabilitida = fechaHabilitida;
+        this.fechaHabilitida = 0;
     }
 
     public Torneo() {
+    }
+
+    public void agregarFechas(Fecha fechaNueva){
+        //TODO VALIDAR QUE LA FECHA CONTENGA PARTIDOS
+        fechas.add(fechaNueva);
     }
 
     public Long getId() {

@@ -23,6 +23,18 @@ public class Partido {
 
     Integer golesVisitante;
 
+    public Partido(Equipo local, Equipo visitante) {
+        //TODO VALIDAR QUE SEAN EQUIPOS VALIDOS
+        this.local = local;
+        this.visitante = visitante;
+        this.golesLocal = -1;
+        this.golesVisitante = -1;
+    }
+
+    public Boolean fueJugado(){
+        return !(golesLocal == -1 || golesVisitante == -1 );
+    }
+
     public Partido() {
     }
 
