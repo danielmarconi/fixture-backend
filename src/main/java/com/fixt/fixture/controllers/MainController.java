@@ -1,7 +1,10 @@
 package com.fixt.fixture.controllers;
 
 import com.fixt.fixture.Services.ServiceFixture;
+import com.fixt.fixture.Services.dto.ResultadoPartido;
 import com.fixt.fixture.model.Equipo;
+import com.fixt.fixture.model.EquipoEnTabla;
+import com.fixt.fixture.model.Partido;
 import com.fixt.fixture.util.Status;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,15 +27,6 @@ public class MainController {
     @Autowired
     private ServiceFixture serviceFixture;
 
-//    @RequestMapping(value = "/book", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-//    @ResponseStatus(value = HttpStatus.OK)
-//    @ResponseBody
-//    public CompraFinalDTO reservarPaqueteDeVuelos(@RequestBody ViajeDTO viajeDTO) {
-//
-//        LOGGER.info("Request: [POST] /BOOK - Body: " + viajeDTO);
-//
-//        return method();
-//    }
 //
 //    @RequestMapping(value = "/destinations", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 //    @ResponseStatus(value = HttpStatus.OK)
@@ -61,5 +55,38 @@ public class MainController {
         LOGGER.info("Request: [GET] /teams");
 
         return serviceFixture.obtenerTodosLosEquipos();
+    }
+
+    @RequestMapping(value = "/table", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseStatus(value = HttpStatus.OK)
+    @ResponseBody
+    public List<EquipoEnTabla> obtenerTabla() {
+
+        LOGGER.info("Request: [GET] /table");
+
+        return serviceFixture.obtenerTodosLosEquiposEnTabla();
+    }
+
+    @RequestMapping(value = "/matches", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseStatus(value = HttpStatus.OK)
+    @ResponseBody
+    public List<Partido> obtenerPartidos() {
+
+        LOGGER.info("Request: [GET] /matches");
+
+        return serviceFixture.obtenerTodosLosPartidos();
+    }
+
+
+    @RequestMapping(value = "/match", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseStatus(value = HttpStatus.OK)
+    @ResponseBody
+    public Partido reservarPaqueteDeVuelos(@RequestBody ResultadoPartido resultadoPartido) {
+
+        LOGGER.info("Request: [POST] /match - Body: " + resultadoPartido);
+
+        return serviceFixture.cargarResultadosPartido(resultadoPartido.getIdPartido(),
+                                                      resultadoPartido.getGolesLocal(),
+                                                      resultadoPartido.getGolesVisitante());
     }
 }

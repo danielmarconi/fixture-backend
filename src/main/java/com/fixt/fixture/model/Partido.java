@@ -35,6 +35,38 @@ public class Partido {
         return !(golesLocal == -1 || golesVisitante == -1 );
     }
 
+    public boolean noFueEmpatado() {
+        return !golesLocal.equals(golesVisitante);
+    }
+
+    private Boolean esGanadorLocal(){
+        return golesLocal > golesVisitante;
+    }
+
+    public Equipo equipoGanador(){
+        if(esGanadorLocal()){
+            return local;
+        }else {
+            return visitante;
+        }
+    }
+
+    public Equipo equipoPerdedor(){
+        if(!esGanadorLocal()){
+            return local;
+        }else {
+            return visitante;
+        }
+    }
+
+    public Integer golesGanador() {
+        return esGanadorLocal()? golesLocal : golesVisitante;
+    }
+
+    public Integer golesPerdedor() {
+        return !esGanadorLocal()? golesLocal : golesVisitante;
+    }
+
     public Partido() {
     }
 
@@ -76,5 +108,10 @@ public class Partido {
 
     public void setGolesVisitante(Integer golesVisitante) {
         this.golesVisitante = golesVisitante;
+    }
+
+    public void cargarResultado(Integer resultadoLocal, Integer resultadoVisitante) {
+        setGolesLocal(resultadoLocal);
+        setGolesVisitante(resultadoVisitante);
     }
 }

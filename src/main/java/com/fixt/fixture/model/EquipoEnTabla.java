@@ -10,7 +10,6 @@ import javax.persistence.*;
 public class EquipoEnTabla {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @OneToOne
@@ -27,6 +26,45 @@ public class EquipoEnTabla {
     private Integer diferenciaDeGoles;
 
     private Integer puntos;
+
+    public EquipoEnTabla(Equipo equipo, Integer partidosJugados, Integer partidosGanados, Integer partidosEmpatados, Integer partidosPerdidos, Integer diferenciaDeGoles, Integer puntos) {
+        this.id = equipo.getId();
+        this.equipo = equipo;
+        this.partidosJugados = partidosJugados;
+        this.partidosGanados = partidosGanados;
+        this.partidosEmpatados = partidosEmpatados;
+        this.partidosPerdidos = partidosPerdidos;
+        this.diferenciaDeGoles = diferenciaDeGoles;
+        this.puntos = puntos;
+    }
+
+    public void ganar(Integer goles){
+        incrementarPartidosJugados();
+        partidosGanados += 1;
+        puntos += 3;
+        sumarGoles(goles);
+    }
+
+    public void perder(Integer goles){
+        incrementarPartidosJugados();
+        partidosPerdidos += 1;
+        sumarGoles(goles);
+    }
+
+    public void empatar(Integer goles){
+        incrementarPartidosJugados();
+        partidosEmpatados += 1;
+        puntos += 1;
+        sumarGoles(goles);
+    }
+
+    private void sumarGoles(Integer goles){
+        diferenciaDeGoles += goles;
+    }
+
+    private void incrementarPartidosJugados(){
+        partidosJugados += 1;
+    }
 
     public EquipoEnTabla() {
     }
