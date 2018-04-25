@@ -1,6 +1,8 @@
 package com.fixt.fixture.controllers;
 
 import com.fixt.fixture.Services.ServiceFixture;
+import com.fixt.fixture.Services.dto.NuevoEquipo;
+import com.fixt.fixture.Services.dto.PartidoNuevo;
 import com.fixt.fixture.Services.dto.ResultadoPartido;
 import com.fixt.fixture.model.Equipo;
 import com.fixt.fixture.model.EquipoEnTabla;
@@ -27,21 +29,10 @@ public class MainController {
     @Autowired
     private ServiceFixture serviceFixture;
 
-//
-//    @RequestMapping(value = "/destinations", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-//    @ResponseStatus(value = HttpStatus.OK)
-//    @ResponseBody
-//    public Collection<CompraFinalDTO> obtenerTopDestinations(@RequestParam(value = "from") String ciudadOrigen) {
-//
-//        LOGGER.info("Request: [GET] /DESTINATIONS - {}", viaje);
-//
-//        return servicioDeReservas.obtenerTopDestinations(viaje);
-//    }
-
-    @RequestMapping(value = "/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(value = "/health-check", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseStatus(value = HttpStatus.OK)
     @ResponseBody()
-    public Status health(){
+    public Status healthCheck(){
         Status status = new Status("OK");
         LOGGER.info("Return Status: {}", status.getStatus());
         return status;
@@ -64,7 +55,7 @@ public class MainController {
 
         LOGGER.info("Request: [GET] /table");
 
-        return serviceFixture.obtenerTodosLosEquiposEnTabla();
+        return serviceFixture.tablaDePosiciones();
     }
 
     @RequestMapping(value = "/matches", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -77,11 +68,10 @@ public class MainController {
         return serviceFixture.obtenerTodosLosPartidos();
     }
 
-
     @RequestMapping(value = "/match", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseStatus(value = HttpStatus.OK)
     @ResponseBody
-    public Partido reservarPaqueteDeVuelos(@RequestBody ResultadoPartido resultadoPartido) {
+    public Partido cargarResultadoDePartido(@RequestBody ResultadoPartido resultadoPartido) {
 
         LOGGER.info("Request: [POST] /match - Body: " + resultadoPartido);
 
@@ -89,4 +79,30 @@ public class MainController {
                                                       resultadoPartido.getGolesLocal(),
                                                       resultadoPartido.getGolesVisitante());
     }
+
+    @CrossOrigin
+    @RequestMapping(value = "/team", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseStatus(value = HttpStatus.OK)
+    @ResponseBody
+    public Equipo crearNuevoEquipo(@RequestBody NuevoEquipo nuevoEquipo) {
+
+        LOGGER.info("Request: [POST] /team - Body: " + nuevoEquipo);
+
+        return serviceFixture.crearEquipo(nuevoEquipo.getNombre(), nuevoEquipo.getImagen());
+    }
+
+    @CrossOrigin
+    @RequestMapping(value = "/new_match", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseStatus(value = HttpStatus.OK)
+    @ResponseBody
+    public Partido crearNuevoPartido(@RequestBody PartidoNuevo nuevoPartido) {
+
+        LOGGER.info("Request: [POST] /team - Body: " + nuevoPartido);
+
+        return serviceFixture.crearPartido(nuevoPartido.getIdLocal(), nuevoPartido.getIdVisitante());
+    }
+
+
+
+
 }

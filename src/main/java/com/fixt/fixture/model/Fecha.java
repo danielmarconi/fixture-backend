@@ -55,4 +55,13 @@ public class Fecha {
     public void setPartidos(List<Partido> partidos) {
         this.partidos = partidos;
     }
+
+    @Override
+    public String toString() {
+        return "Fecha{" +
+                "id=" + id +
+                ", numeroDeFecha=" + numeroDeFecha +
+                ", partidos=" + partidos +
+                '}';
+    }
 }

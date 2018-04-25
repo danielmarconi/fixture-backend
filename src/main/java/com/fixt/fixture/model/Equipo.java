@@ -1,6 +1,7 @@
 package com.fixt.fixture.model;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 /**
  * Created by kevinvarela on 06/03/18.
@@ -17,7 +18,9 @@ public class Equipo {
     String imagen;
 
     public Equipo(String nombre, String imagen) {
-        //TODO VALIDAR QUE SEA UN EQUIPO VALIDO
+        if(nombre.isEmpty() || nombre == null){
+            throw new RuntimeException("El nombre del equipo no debe estar vacio.");
+        }
         this.nombre = nombre;
         this.imagen = imagen;
     }
@@ -47,5 +50,28 @@ public class Equipo {
 
     public void setImagen(String imagen) {
         this.imagen = imagen;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Equipo equipo = (Equipo) o;
+        return Objects.equals(nombre, equipo.nombre);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(nombre);
+    }
+
+    @Override
+    public String toString() {
+        return "Equipo{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", imagen='" + imagen + '\'' +
+                '}';
     }
 }

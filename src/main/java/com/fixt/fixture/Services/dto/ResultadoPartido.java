@@ -35,4 +35,13 @@ public class ResultadoPartido {
     public void setGolesVisitante(Integer golesVisitante) {
         this.golesVisitante = golesVisitante;
     }
+
+    @Override
+    public String toString() {
+        return "ResultadoPartido{" +
+                "idPartido=" + idPartido +
+                ", golesLocal=" + golesLocal +
+                ", golesVisitante=" + golesVisitante +
+                '}';
+    }
 }

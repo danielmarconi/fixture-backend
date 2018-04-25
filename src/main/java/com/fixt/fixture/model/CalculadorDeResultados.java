@@ -20,15 +20,19 @@ public class CalculadorDeResultados {
     private TablaRepository tablaRepository;
 
     public Partido cargarResultadosPartido(Long idPartido, Integer resultadoLocal, Integer resultadoVisitante){
-        Optional<Partido> partidoAActualizar = partidoRepository.findById(idPartido);
+        Optional<Partido> partidoPorJugar = partidoRepository.findById(idPartido);
         try{
-            partidoAActualizar.ifPresent(partido -> partido.cargarResultado(resultadoLocal, resultadoVisitante));
-            Partido partidoActualizado = partidoAActualizar.get();
-            partidoRepository.save(partidoActualizado);
-            actualizarTablaDelTorneo(partidoActualizado);
-            return partidoActualizado;
+            if(partidoPorJugar.isPresent() && !partidoPorJugar.get().fueJugado()){
+                Partido partido = partidoPorJugar.get();
+                partido.cargarResultado(resultadoLocal, resultadoVisitante);
+                partidoRepository.save(partido);
+                actualizarTablaDelTorneo(partido);
+                return partido;
+            }else{
+                throw new RuntimeException("No se pudo actualizar el partido.");
+            }
         }catch (Exception e){
-            throw new RuntimeException("No se pudo actualizar el partido", e);
+            throw new RuntimeException("El partido que intento cargar no esta para ser jugado.", e);
         }
     }
 

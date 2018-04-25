@@ -114,4 +114,15 @@ public class Partido {
         setGolesLocal(resultadoLocal);
         setGolesVisitante(resultadoVisitante);
     }
+
+    @Override
+    public String toString() {
+        return "Partido{" +
+                "id=" + id +
+                ", local=" + local +
+                ", visitante=" + visitante +
+                ", golesLocal=" + golesLocal +
+                ", golesVisitante=" + golesVisitante +
+                '}';
+    }
 }

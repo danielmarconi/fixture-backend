@@ -132,4 +132,18 @@ public class EquipoEnTabla {
     public void setPuntos(Integer puntos) {
         this.puntos = puntos;
     }
+
+    @Override
+    public String toString() {
+        return "EquipoEnTabla{" +
+                "id=" + id +
+                ", equipo=" + equipo +
+                ", partidosJugados=" + partidosJugados +
+                ", partidosGanados=" + partidosGanados +
+                ", partidosEmpatados=" + partidosEmpatados +
+                ", partidosPerdidos=" + partidosPerdidos +
+                ", diferenciaDeGoles=" + diferenciaDeGoles +
+                ", puntos=" + puntos +
+                '}';
+    }
 }

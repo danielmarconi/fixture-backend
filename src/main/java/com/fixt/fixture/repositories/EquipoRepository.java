@@ -11,4 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public interface EquipoRepository extends CrudRepository<Equipo, Long> {
 
+
+
 }

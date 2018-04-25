@@ -65,4 +65,14 @@ public class Torneo {
     public void setFechaHabilitida(Integer fechaHabilitida) {
         this.fechaHabilitida = fechaHabilitida;
     }
+
+    @Override
+    public String toString() {
+        return "Torneo{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", fechas=" + fechas +
+                ", fechaHabilitida=" + fechaHabilitida +
+                '}';
+    }
 }
