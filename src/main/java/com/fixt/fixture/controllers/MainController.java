@@ -4,9 +4,11 @@ import com.fixt.fixture.Services.ServiceFixture;
 import com.fixt.fixture.Services.dto.NuevoEquipo;
 import com.fixt.fixture.Services.dto.PartidoNuevo;
 import com.fixt.fixture.Services.dto.ResultadoPartido;
+import com.fixt.fixture.Services.dto.NuevoUsuario;
 import com.fixt.fixture.model.Equipo;
 import com.fixt.fixture.model.EquipoEnTabla;
 import com.fixt.fixture.model.Partido;
+import com.fixt.fixture.model.Usuario;
 import com.fixt.fixture.util.Status;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -89,6 +91,40 @@ public class MainController {
         LOGGER.info("Request: [POST] /team - Body: " + nuevoEquipo);
 
         return serviceFixture.crearEquipo(nuevoEquipo.getNombre(), nuevoEquipo.getImagen());
+    }
+
+    @CrossOrigin
+    @RequestMapping(value = "/users", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseStatus(value = HttpStatus.OK)
+    @ResponseBody
+    public List<Usuario> obtenerUsuarios() {
+
+        LOGGER.info("Request: [GET] /users");
+
+        return serviceFixture.obtenerTodosLosUsuarios();
+    }
+
+    @CrossOrigin
+    @RequestMapping(value = "/users/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseStatus(value = HttpStatus.OK)
+    @ResponseBody
+    public Usuario obtenerUsuario(
+            @PathVariable("id") long id) {
+
+        LOGGER.info("Request: [GET] /users");
+
+        return serviceFixture.obtenerUsuarioPorId(id);
+    }
+
+    @CrossOrigin
+    @RequestMapping(value = "/users", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseStatus(value = HttpStatus.OK)
+    @ResponseBody
+    public Usuario crearUsuario(@RequestBody NuevoUsuario usuario) {
+
+        LOGGER.info("Request: [GET] /users");
+
+        return serviceFixture.crearUsuario( usuario );
     }
 
     @CrossOrigin

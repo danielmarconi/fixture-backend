@@ -1,5 +1,6 @@
 package com.fixt.fixture.Services;
 
+import com.fixt.fixture.Services.dto.NuevoUsuario;
 import com.fixt.fixture.model.*;
 import com.fixt.fixture.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -138,6 +139,28 @@ public class ServiceFixture {
             return equipoRepository.findById(id).get();
         }catch (Exception e){
             throw new RuntimeException("El equipo de id: '" + id + "' no existe en la base");
+        }
+    }
+
+    public Usuario obtenerUsuarioPorId(Long id){
+        try{
+            return usuarioRepository.findById(id).get();
+        }catch (Exception e){
+            throw new RuntimeException("El usuario de id: '" + id + "' no existe en la base");
+        }
+    }
+
+    public List<Usuario> obtenerTodosLosUsuarios(){
+        return (List<Usuario>) usuarioRepository.findAll();
+    }
+
+    public Usuario crearUsuario( NuevoUsuario u ){
+        Equipo equipo = obtenerEquipoPorId( u.getIdEquipo() );
+        Usuario nuevoUsuario = new Usuario( u.getNombre() , u.getTelefono(), u.getPsn_user(), equipo );
+        try{
+            return usuarioRepository.save(nuevoUsuario);
+        } catch (Exception e){
+            throw new RuntimeException("Error al crear el usuario.");
         }
     }
 
