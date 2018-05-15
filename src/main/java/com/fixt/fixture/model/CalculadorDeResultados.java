@@ -37,15 +37,19 @@ public class CalculadorDeResultados {
     }
 
     private void actualizarTablaDelTorneo(Partido partidoACargar) {
-        if(partidoACargar.noFueEmpatado()){
-            Equipo equipoGanador = partidoACargar.equipoGanador();
-            EquipoEnTabla equipoGanadorEnTabla = tablaRepository.findById(equipoGanador.getId()).get();
-            equipoGanadorEnTabla.ganar(partidoACargar.golesGanador());
-            tablaRepository.save(equipoGanadorEnTabla);
 
+        if(partidoACargar.noFueEmpatado()){
+
+            Equipo equipoGanador = partidoACargar.equipoGanador();
             Equipo equipoPerdedor = partidoACargar.equipoPerdedor();
+
+            EquipoEnTabla equipoGanadorEnTabla = tablaRepository.findById(equipoGanador.getId()).get();
             EquipoEnTabla equipoPerdedorEnTabla = tablaRepository.findById(equipoPerdedor.getId()).get();
-            equipoPerdedorEnTabla.perder(partidoACargar.golesPerdedor());
+
+            equipoGanadorEnTabla.ganar(partidoACargar);
+            equipoPerdedorEnTabla.perder(partidoACargar);
+
+            tablaRepository.save(equipoGanadorEnTabla);
             tablaRepository.save(equipoPerdedorEnTabla);
 
         }else {
@@ -55,9 +59,9 @@ public class CalculadorDeResultados {
             EquipoEnTabla equipoLocalEnTabla = tablaRepository.findById(equipoLocal.getId()).get();
             EquipoEnTabla equipoVisitanteEnTabla = tablaRepository.findById(equipoVisitante.getId()).get();
 
-            equipoLocalEnTabla.empatar(partidoACargar.golesLocal);
+            equipoLocalEnTabla.empatar();
+            equipoVisitanteEnTabla.empatar();
             tablaRepository.save(equipoLocalEnTabla);
-            equipoVisitanteEnTabla.empatar(partidoACargar.golesVisitante);
             tablaRepository.save(equipoVisitanteEnTabla);
         }
     }

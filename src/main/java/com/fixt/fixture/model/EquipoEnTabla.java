@@ -38,24 +38,26 @@ public class EquipoEnTabla {
         this.puntos = puntos;
     }
 
-    public void ganar(Integer goles){
+    public void ganar(Partido partido){
         incrementarPartidosJugados();
+        sumarGoles(partido.diferenciaDeGolesGanador());
+
         partidosGanados += 1;
         puntos += 3;
-        sumarGoles(goles);
     }
 
-    public void perder(Integer goles){
+    public void perder(Partido partido){
         incrementarPartidosJugados();
+        sumarGoles(partido.diferenciaDeGolesPerdedor());
+
         partidosPerdidos += 1;
-        sumarGoles(goles);
     }
 
-    public void empatar(Integer goles){
+    public void empatar(){
         incrementarPartidosJugados();
+
         partidosEmpatados += 1;
         puntos += 1;
-        sumarGoles(goles);
     }
 
     private void sumarGoles(Integer goles){

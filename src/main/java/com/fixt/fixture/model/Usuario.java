@@ -12,17 +12,17 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    String nombre;
-    String telefono;
-    String psn_user;
+    private String nombre;
+    private String telefono;
+    private String psnUser;
 
     @OneToOne
     Equipo equipo;
 
-    public Usuario(String nombre, String telefono, String psn_user, Equipo equipo) {
+    public Usuario(String nombre, String telefono, String psnUser, Equipo equipo) {
         this.nombre = nombre;
         this.telefono = telefono;
-        this.psn_user = psn_user;
+        this.psnUser = psnUser;
         this.equipo = equipo;
     }
 
@@ -46,12 +46,12 @@ public class Usuario {
         this.telefono = telefono;
     }
 
-    public String getPsn_user() {
-        return psn_user;
+    public String getPsnUser() {
+        return psnUser;
     }
 
-    public void setPsn_user(String psn_user) {
-        this.psn_user = psn_user;
+    public void setPsnUser(String psnUser) {
+        this.psnUser = psnUser;
     }
 
     public Long getId() {

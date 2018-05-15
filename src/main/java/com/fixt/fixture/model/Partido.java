@@ -67,6 +67,14 @@ public class Partido {
         return !esGanadorLocal()? golesLocal : golesVisitante;
     }
 
+    public Integer diferenciaDeGolesGanador(){
+        return golesGanador() - golesPerdedor();
+    }
+
+    public Integer diferenciaDeGolesPerdedor(){
+        return golesPerdedor() - golesGanador();
+    }
+
     public Partido() {
     }
 
