@@ -1,5 +1,12 @@
 # fixture-backend
 
+Workflow para cargar torneos
+
+1. Crear Equipos
+2. Crear Torneo
+3. Crear Fecha
+4. Agregar Partidos a fecha
+
 ## GET - /teams   -> Todos los equipos
 #### Respuesta:
 ```javascript
